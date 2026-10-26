@@ -1,0 +1,12 @@
+{
+  "//": "MERGE INTO composer.json -> scripts. 1) --no-cache-clear keeps zero-downtime builds from clearing the live cache. 2) `composer dev` mirrors the SaaS dev runner.",
+  "post-autoload-dump": [
+    "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+    "@php artisan package:discover --ansi",
+    "@php artisan statamic:install --ansi --no-cache-clear"
+  ],
+  "dev": [
+    "Composer\\Config::disableProcessTimeout",
+    "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"php artisan schedule:work\" --names=server,queue,logs,schedule --kill-others"
+  ]
+}

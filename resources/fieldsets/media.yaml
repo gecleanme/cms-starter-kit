@@ -1,0 +1,20 @@
+title: Media
+fields:
+  -
+    handle: image
+    field:
+      type: assets
+      container: assets
+      max_files: 1
+      display: Image
+      instructions: 'Alt text is edited on the image itself (click the image, then Edit).'
+  -
+    handle: caption
+    field:
+      type: text
+      display: Caption
+  -
+    handle: credit
+    field:
+      type: text
+      display: Credit

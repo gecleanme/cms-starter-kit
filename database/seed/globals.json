@@ -1,0 +1,20 @@
+{
+  "//": "Values for `php artisan cms:seed-globals`. Replace every company-name placeholder with the real values from the live site footer, then run the command. Only empty fields are filled unless you pass --force.",
+  "site_settings": {
+    "company_email": "info@company-name.com",
+    "company_location": "Street address line 1\nCity, State ZIP",
+    "social_links": [
+      { "platform": "facebook", "url": "https://www.facebook.com/company-name" },
+      { "platform": "x", "url": "https://x.com/company-name" },
+      { "platform": "instagram", "url": "https://www.instagram.com/company-name/" },
+      { "platform": "linkedin", "url": "https://www.linkedin.com/company/company-name/" },
+      { "platform": "youtube", "url": "https://www.youtube.com/@company-name" }
+    ],
+    "copyright": "Copyright © {year} company-name, Inc. All rights reserved."
+  },
+  "newsletter_cta": {
+    "heading": "Receive Exclusive Access",
+    "copy": "Subscribe to our newsletter for the latest early access information.",
+    "form": "sign_up"
+  }
+}

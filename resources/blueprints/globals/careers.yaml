@@ -1,0 +1,15 @@
+title: Careers
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: rippling_url
+        field:
+          type: text
+          input_type: url
+          display: Rippling job board URL
+      - handle: intro
+        field:
+          type: textarea
+          display: Intro text

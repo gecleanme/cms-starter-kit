@@ -1,0 +1,6 @@
+title: Pages
+route: '/{parent_uri}/{slug}'
+revisions: true
+structure:
+  root: true                # first page in the tree is the home page
+  max_depth: 4

@@ -1,0 +1,6 @@
+title: Main Navigation
+collections:
+  - pages
+  - posts
+  - workloads
+max_depth: 2

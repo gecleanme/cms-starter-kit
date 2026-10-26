@@ -1,0 +1,90 @@
+title: 'Rich content (Bard)'
+# Only design-system formatting is offered: no colours, fonts or sizes.
+# The Importer may ADD sets for WordPress core blocks it finds on the first import.
+# Review them afterwards, rename/merge into the sets below, and commit this file.
+fields:
+  -
+    handle: content
+    field:
+      type: bard
+      display: Content
+      container: assets
+      buttons:
+        - h2
+        - h3
+        - h4
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - quote
+        - anchor
+        - table
+        - code
+        - image
+      save_html: false
+      toolbar_mode: fixed
+      link_noopener: true
+      link_noreferrer: true
+      target_blank: false
+      sets:
+        main:
+          display: Blocks
+          sets:
+            image:
+              display: Image
+              icon: media-image-picture-orientation
+              fields:
+                -
+                  import: media
+            video_embed:
+              display: 'Video (YouTube/Vimeo)'
+              fields:
+                -
+                  handle: url
+                  field:
+                    type: video
+                    display: 'Video URL'
+                -
+                  handle: caption
+                  field:
+                    type: text
+                    display: Caption
+            callout:
+              display: Callout
+              fields:
+                -
+                  handle: tone
+                  field:
+                    type: button_group
+                    display: Tone
+                    options:
+                      info: Info
+                      success: Success
+                      warning: Warning
+                    default: info
+                -
+                  handle: body
+                  field:
+                    type: textarea
+                    display: Text
+            cta:
+              display: 'Button (CTA)'
+              fields:
+                -
+                  import: cta_button
+                  prefix: cta_
+            form:
+              display: Form
+              fields:
+                -
+                  handle: form
+                  field:
+                    type: form
+                    display: Form
+                    max_items: 1
+                -
+                  handle: heading
+                  field:
+                    type: text
+                    display: 'Heading (optional)'

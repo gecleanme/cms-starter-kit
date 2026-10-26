@@ -1,0 +1,46 @@
+title: SEO
+fields:
+  -
+    handle: seo_title
+    field:
+      type: text
+      display: 'SEO title'
+      instructions: 'Shown in search results and the browser tab. Leave empty to use the entry title.'
+      character_limit: 70
+  -
+    handle: seo_description
+    field:
+      type: textarea
+      display: 'Meta description'
+      character_limit: 160
+  -
+    handle: seo_canonical
+    field:
+      type: text
+      input_type: url
+      display: 'Canonical URL'
+      instructions: 'Only set when this page should point search engines at a different URL.'
+  -
+    handle: seo_noindex
+    field:
+      type: toggle
+      display: 'Hide from search engines (noindex)'
+      default: false
+  -
+    handle: og_title
+    field:
+      type: text
+      display: 'Social share title'
+  -
+    handle: og_description
+    field:
+      type: textarea
+      display: 'Social share description'
+  -
+    handle: og_image
+    field:
+      type: assets
+      container: assets
+      max_files: 1
+      display: 'Social share image'
+      instructions: '1200 x 630 recommended. Falls back to the featured image.'

@@ -1,0 +1,22 @@
+title: Legacy (WordPress)
+fields:
+  -
+    handle: wp_id
+    field:
+      type: integer
+      display: 'WordPress ID'
+      visibility: read_only
+      instructions: 'Used as the Unique Field for re-imports. Do not edit.'
+  -
+    handle: wp_url
+    field:
+      type: text
+      display: 'WordPress URL'
+      visibility: read_only
+  -
+    handle: wp_builder
+    field:
+      type: text
+      display: 'WordPress editor'
+      visibility: read_only
+      instructions: '"builder" = built with Elementor; empty = block or classic editor.'

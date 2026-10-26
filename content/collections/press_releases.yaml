@@ -1,0 +1,5 @@
+title: Press Releases
+# No route: press releases link out (link_url).
+date: true
+sort_dir: desc
+revisions: false

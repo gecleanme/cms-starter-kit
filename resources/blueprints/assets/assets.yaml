@@ -1,0 +1,19 @@
+title: Asset
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: alt
+        field:
+          type: text
+          display: Alt text
+          instructions: Describe the image for screen readers. Leave empty only for decorative images.
+      - handle: caption
+        field:
+          type: text
+          display: Caption
+      - handle: credit
+        field:
+          type: text
+          display: Credit

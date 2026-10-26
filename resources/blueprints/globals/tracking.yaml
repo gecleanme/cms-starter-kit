@@ -1,0 +1,31 @@
+title: Tracking
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: gtm_container_id
+        field:
+          type: text
+          display: Google Tag Manager container ID
+          placeholder: GTM-XXXXXXX
+          validate:
+          - nullable
+          - regex:/^GTM-[A-Z0-9]+$/
+      - handle: hubspot_portal_id
+        field:
+          type: text
+          display: HubSpot portal (hub) ID
+          validate:
+          - nullable
+          - regex:/^[0-9]+$/
+      - handle: drip_account_id
+        field:
+          type: text
+          display: Drip account ID
+      - handle: extra_head_scripts
+        field:
+          type: code
+          mode: htmlmixed
+          display: Extra <head> scripts (admins only)
+          instructions: Prefer adding tags in GTM. Anything here ships on every page.

@@ -1,0 +1,75 @@
+title: Post
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: title
+        field:
+          type: text
+          display: Title
+          required: true
+          validate:
+          - required
+      - handle: excerpt
+        field:
+          type: textarea
+          display: Excerpt
+          instructions: Used on cards and as the fallback meta description.
+      - handle: featured_image
+        field:
+          type: assets
+          container: assets
+          max_files: 1
+          display: Featured image
+      - import: rich_content
+  seo:
+    display: SEO
+    sections:
+    - fields:
+      - import: seo
+  legacy:
+    display: WordPress
+    sections:
+    - fields:
+      - import: legacy
+  sidebar:
+    display: Sidebar
+    sections:
+    - fields:
+      - handle: slug
+        field:
+          type: slug
+          display: Slug
+          validate:
+          - max:200
+      - handle: date
+        field:
+          type: date
+          display: Publish date
+          time_enabled: true
+          required: true
+          validate:
+          - required
+      - handle: authors
+        field:
+          type: users
+          display: Authors
+          mode: select
+          instructions: One or more authors. Guest authors are users marked "Guest author".
+      - handle: categories
+        field:
+          type: terms
+          taxonomies:
+          - categories
+          display: Categories
+          mode: select
+          create: false
+      - handle: tags
+        field:
+          type: terms
+          taxonomies:
+          - tags
+          display: Tags
+          mode: select
+          create: true

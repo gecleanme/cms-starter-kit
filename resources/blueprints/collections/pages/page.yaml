@@ -1,0 +1,41 @@
+title: Page
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: title
+        field:
+          type: text
+          display: Title
+          required: true
+          validate:
+          - required
+      - import: page_builder
+  seo:
+    display: SEO
+    sections:
+    - fields:
+      - import: seo
+  legacy:
+    display: WordPress
+    sections:
+    - fields:
+      - import: legacy
+      - handle: legacy_html
+        field:
+          type: code
+          mode: htmlmixed
+          display: Legacy page HTML (reference only)
+          visibility: read_only
+          instructions: Imported from WordPress/Elementor for reference while v2 sections are built. Not shown on the site.
+  sidebar:
+    display: Sidebar
+    sections:
+    - fields:
+      - handle: slug
+        field:
+          type: slug
+          display: Slug
+          validate:
+          - max:200

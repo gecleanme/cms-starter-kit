@@ -1,0 +1,43 @@
+title: Sign Up
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: first_name
+        field:
+          type: text
+          display: First name
+          validate:
+          - required
+          - max:100
+          width: 50
+      - handle: last_name
+        field:
+          type: text
+          display: Last name
+          validate:
+          - required
+          - max:100
+          width: 50
+      - handle: email
+        field:
+          type: text
+          input_type: email
+          display: Email
+          validate:
+          - required
+          - email:rfc
+          - max:200
+      - handle: workloads
+        field:
+          type: checkboxes
+          display: Select any workloads that pertain to you
+          options:
+            Architecture & Design: Architecture & Design
+            Gaming: Gaming
+            Game Development: Game Development
+            Film & Television: Film & Television
+            HPC: HPC
+            Product Design: Product Design
+            VR & AR: VR & AR

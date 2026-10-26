@@ -1,0 +1,26 @@
+# rsync --exclude-from for wp-content/uploads -> storage/app/public/assets
+# Dry-run first (rsync -avzn ...) and eyeball what is skipped.
+
+# WordPress size variants (Glide makes its own). "-scaled" originals are KEPT.
+*-[0-9]*x[0-9]*.jpg
+*-[0-9]*x[0-9]*.jpeg
+*-[0-9]*x[0-9]*.png
+*-[0-9]*x[0-9]*.gif
+*-[0-9]*x[0-9]*.webp
+
+# Next-gen copies made by image-optimization plugins
+*.jpg.webp
+*.jpeg.webp
+*.png.webp
+*.avif
+
+# NEVER copy: Gravity Forms uploads = applicant resumes (PII)
+gravity_forms/
+
+# Plugin caches / logs / exports
+elementor/
+cache/
+wc-logs/
+woocommerce_uploads/
+wpallexport/
+wpallimport/

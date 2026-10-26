@@ -1,0 +1,60 @@
+title: 'CTA button (design system)'
+# Option values ARE the ApButton.vue prop values in the SaaS design system.
+# Nuxt passes them through unchanged: <ApButton :color="cta.color" :variant="cta.variant" :size="cta.size">
+fields:
+  -
+    handle: label
+    field:
+      type: text
+      display: Label
+      validate:
+        - required
+  -
+    handle: link
+    field:
+      type: link
+      display: Link
+      collections:
+        - pages
+        - posts
+        - workloads
+      validate:
+        - required
+  -
+    handle: color
+    field:
+      type: button_group
+      display: Style
+      options:
+        primary: Primary
+        secondary: Secondary
+        special-secondary: 'Special secondary'
+      default: primary
+  -
+    handle: variant
+    field:
+      type: button_group
+      display: Variant
+      options:
+        solid: Solid
+        link: Link
+        text: Text
+      default: solid
+  -
+    handle: size
+    field:
+      type: button_group
+      display: Size
+      options:
+        xs: Small
+        md: Medium
+      default: md
+  -
+    handle: icon
+    field:
+      type: text
+      display: 'Icon (optional)'
+      instructions: 'A Material Symbols name, e.g. arrow_forward. Browse at fonts.google.com/icons.'
+      validate:
+        - 'nullable'
+        - 'regex:/^[a-z0-9_]+$/'

@@ -1,0 +1,2 @@
+title: Categories
+# Public URL (/category/{slug}) is produced by Nuxt. Terms are flat in Statamic; the WP hierarchy is kept in the `parent` field.

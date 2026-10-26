@@ -1,0 +1,19 @@
+title: Newsletter CTA
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: heading
+        field:
+          type: text
+          display: Heading
+      - handle: copy
+        field:
+          type: textarea
+          display: Text
+      - handle: form
+        field:
+          type: form
+          display: Form
+          max_items: 1

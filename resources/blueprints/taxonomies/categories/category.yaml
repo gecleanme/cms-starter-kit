@@ -1,0 +1,49 @@
+title: Category
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: title
+        field:
+          type: text
+          display: Title
+          required: true
+          validate:
+          - required
+      - handle: description
+        field:
+          type: textarea
+          display: Description
+      - handle: parent
+        field:
+          type: terms
+          taxonomies:
+          - categories
+          max_items: 1
+          display: Parent category
+          instructions: Keeps the WordPress category hierarchy.
+  seo:
+    display: SEO
+    sections:
+    - fields:
+      - import: seo
+  legacy:
+    display: WordPress
+    sections:
+    - fields:
+      - handle: wp_id
+        field:
+          type: integer
+          display: WordPress term ID
+          visibility: read_only
+  sidebar:
+    display: Sidebar
+    sections:
+    - fields:
+      - handle: slug
+        field:
+          type: slug
+          display: Slug
+          validate:
+          - max:200

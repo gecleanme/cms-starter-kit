@@ -1,0 +1,76 @@
+title: Job Application
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: first_name
+        field:
+          type: text
+          display: First name
+          validate:
+          - required
+          - max:100
+          width: 50
+      - handle: last_name
+        field:
+          type: text
+          display: Last name
+          validate:
+          - required
+          - max:100
+          width: 50
+      - handle: email
+        field:
+          type: text
+          input_type: email
+          display: Email
+          validate:
+          - required
+          - email:rfc
+          - max:200
+      - handle: phone
+        field:
+          type: text
+          input_type: tel
+          display: Phone
+          validate:
+          - required
+          - max:40
+      - handle: position
+        field:
+          type: select
+          display: Job position
+          options:
+            Site Reliability Engineer: Site Reliability Engineer
+            Project Manager: Project Manager
+            Digital Design Engineer: Digital Design Engineer
+            Physical Design Engineer: Physical Design Engineer
+            Senior Software Engineer: Senior Software Engineer
+            R&D Engineer: R&D Engineer
+            CFO: CFO
+            Bookkeeper: Bookkeeper
+            Graphic Designer / Motion Graphics: Graphic Designer / Motion Graphics
+            Video Editor: Video Editor
+            3D Artist: 3D Artist
+            Social Media Manager: Social Media Manager
+          validate:
+          - required
+      - handle: resume
+        field:
+          type: files
+          display: Resume
+          max_files: 1
+          validate:
+          - required
+          - file
+          - mimes:pdf,doc,docx
+          - max:10240
+          instructions: PDF or Word, up to 10 MB. Attached to the notification email, then deleted from the server.
+      - handle: message
+        field:
+          type: textarea
+          display: Message
+          validate:
+          - nullable
+          - max:5000

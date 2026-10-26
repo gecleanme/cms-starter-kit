@@ -1,0 +1,68 @@
+title: Event
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: title
+        field:
+          type: text
+          display: Title
+          required: true
+          validate:
+          - required
+      - handle: summary
+        field:
+          type: textarea
+          display: Short description
+          instructions: Was "Event Description" in WordPress.
+      - import: rich_content
+      - handle: featured_image
+        field:
+          type: assets
+          container: assets
+          max_files: 1
+          display: Featured image
+  legacy:
+    display: WordPress
+    sections:
+    - fields:
+      - import: legacy
+  sidebar:
+    display: Sidebar
+    sections:
+    - fields:
+      - handle: start_date
+        field:
+          type: date
+          display: Start date
+          validate:
+          - required
+      - handle: end_date
+        field:
+          type: date
+          display: End date
+      - handle: location
+        field:
+          type: text
+          display: Location
+      - handle: event_url
+        field:
+          type: text
+          input_type: url
+          display: Event URL
+      - handle: email_link
+        field:
+          type: text
+          display: Email link
+      - handle: anchor_id
+        field:
+          type: slug
+          display: Anchor ID
+          instructions: Unique ID so this event can be linked to (#anchor). Was "Event ID".
+      - handle: slug
+        field:
+          type: slug
+          display: Slug
+          validate:
+          - max:200

@@ -1,0 +1,67 @@
+# Roles live in git (permissions are configuration). Users themselves are in the database.
+# Super users bypass all permissions.
+editor:
+  title: Editor
+  permissions:
+    - 'access cp'
+    - 'view users'          # needed to pick authors (users) on posts; editing other users stays admin-only
+    - 'view posts entries'
+    - 'create posts entries'
+    - 'edit posts entries'
+    - 'publish posts entries'
+    - 'delete posts entries'
+    - 'edit other authors posts entries'
+    - 'publish other authors posts entries'
+    - 'view pages entries'
+    - 'edit pages entries'
+    - 'view events entries'
+    - 'create events entries'
+    - 'edit events entries'
+    - 'publish events entries'
+    - 'view press_releases entries'
+    - 'create press_releases entries'
+    - 'edit press_releases entries'
+    - 'publish press_releases entries'
+    - 'view categories terms'
+    - 'create categories terms'
+    - 'edit categories terms'
+    - 'view tags terms'
+    - 'create tags terms'
+    - 'edit tags terms'
+    - 'view assets assets'
+    - 'upload assets assets'
+    - 'edit assets assets'
+marketing:
+  title: Marketing
+  permissions:
+    - 'access cp'
+    - 'view users'
+    - 'view posts entries'
+    - 'edit posts entries'
+    - 'view pages entries'
+    - 'create pages entries'
+    - 'edit pages entries'
+    - 'publish pages entries'
+    - 'reorder pages entries'
+    - 'view redirects entries'
+    - 'create redirects entries'
+    - 'edit redirects entries'
+    - 'publish redirects entries'
+    - 'delete redirects entries'
+    - 'edit tracking globals'
+    - 'edit newsletter_cta globals'
+    - 'edit careers globals'
+    - 'view main_nav nav'
+    - 'edit main_nav nav'
+    - 'view footer_nav nav'
+    - 'edit footer_nav nav'
+    - 'view sign_up form submissions'
+    - 'view contact form submissions'
+    - 'view newsletter form submissions'
+    - 'view assets assets'
+    - 'upload assets assets'
+    - 'edit assets assets'
+admin:
+  title: 'Site admin'
+  permissions:
+    - super

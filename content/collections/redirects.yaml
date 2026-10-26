@@ -1,0 +1,5 @@
+title: Redirects
+# No route. Consumed by Nuxt at build time (routeRules on Forge, vercel.json/route rules on Vercel).
+sort_by: source
+sort_dir: asc
+revisions: false

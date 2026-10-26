@@ -1,0 +1,11 @@
+title: Posts
+route: '/{slug}'            # WP permalink: https://company-name.com/sample-post/
+date: true
+date_behavior:
+  past: public
+  future: private           # future-dated = scheduled; EntryScheduleReached fires at publish time
+sort_dir: desc
+revisions: true
+taxonomies:
+  - categories
+  - tags

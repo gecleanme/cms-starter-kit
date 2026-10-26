@@ -1,0 +1,53 @@
+title: Redirect
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: title
+        field:
+          type: text
+          display: Note
+          instructions: Internal note, e.g. why this redirect exists.
+      - handle: source
+        field:
+          type: text
+          display: From (path)
+          instructions: Path only, e.g. /old-post/
+          validate:
+          - required
+      - handle: destination
+        field:
+          type: text
+          display: To (path or URL)
+          validate:
+          - required
+      - handle: status_code
+        field:
+          type: button_group
+          display: Type
+          options:
+            '301': 301 Permanent
+            '302': 302 Temporary
+            '410': 410 Gone
+          default: '301'
+      - handle: is_regex
+        field:
+          type: toggle
+          display: Source is a regex
+          default: false
+  legacy:
+    display: WordPress
+    sections:
+    - fields:
+      - import: legacy
+  sidebar:
+    display: Sidebar
+    sections:
+    - fields:
+      - handle: slug
+        field:
+          type: slug
+          display: Slug
+          validate:
+          - max:200

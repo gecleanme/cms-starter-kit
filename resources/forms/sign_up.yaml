@@ -1,0 +1,10 @@
+# Rebuilt from Gravity Forms form ID 1. Recipients are the (sanitized) prod values: confirm them (P-22, E7).
+# Sign Up (GF 1) and Newsletter (GF 4) have near-identical fields. Merge or keep: P-17.
+title: Sign Up
+honeypot: website
+store: true
+email:
+- to: info@company-name.com
+  from: info@company-name.com
+  reply_to: '{{ email }}'
+  subject: New Sign Up submission from {{ first_name }} {{ last_name }}

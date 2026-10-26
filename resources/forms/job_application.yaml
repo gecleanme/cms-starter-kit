@@ -1,0 +1,11 @@
+# Rebuilt from Gravity Forms form ID 3. Recipients are the (sanitized) prod values: confirm them (P-22, E7).
+# GF also sent position-based emails (R&D -> hiring manager, most roles -> HR). Parked as P-19 (needs a listener).
+title: Job Application
+honeypot: website
+store: true
+email:
+- to: info@company-name.com
+  from: info@company-name.com
+  reply_to: '{{ email }}'
+  subject: New Job Application submission from {{ first_name }} {{ last_name }}
+  attachments: true

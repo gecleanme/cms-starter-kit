@@ -1,0 +1,5 @@
+title: Events
+# No route: events have no URL of their own on prod (shown through blocks/sections only).
+sort_by: start_date
+sort_dir: desc
+revisions: false

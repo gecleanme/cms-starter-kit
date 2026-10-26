@@ -1,0 +1,15 @@
+title: 'Section surface (design tokens)'
+# Semantic surface names, mapped in Nuxt to theme tokens:
+# default -> bg-bg-primary, subtle -> bg-fg-quinary, brand -> bg-brand-2, accent -> bg-brand-1
+fields:
+  -
+    handle: surface
+    field:
+      type: button_group
+      display: Background
+      options:
+        default: Default
+        subtle: Subtle
+        brand: Brand
+        accent: Accent
+      default: default

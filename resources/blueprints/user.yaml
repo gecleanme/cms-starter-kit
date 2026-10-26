@@ -1,0 +1,63 @@
+# Users ARE the authors (like WordPress). Staff log in; guest authors (Co-Authors Plus) are users with no role
+# and no password, so they can be credited on posts but cannot access the control panel.
+# Every non-default field below is a real column on `users` (see database/migrations/*_add_author_fields_to_users_table.php).
+title: User
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: Account
+        fields:
+          -
+            handle: name
+            field: { type: text, display: Name, validate: [required], listable: true }
+          -
+            handle: email
+            field: { type: text, input_type: email, display: 'Email address', listable: true }
+          -
+            handle: roles
+            field: { type: user_roles, mode: select, width: 50, listable: true }
+          -
+            handle: groups
+            field: { type: user_groups, mode: select, width: 50 }
+      -
+        display: 'Author profile (public)'
+        instructions: 'Shown on posts and on /author/{slug}. Email is never published.'
+        fields:
+          -
+            handle: author_slug
+            field:
+              type: slug
+              display: 'Author URL slug'
+              instructions: 'Public URL: /author/{slug}. Leave empty for users who never write posts.'
+              validate: ['nullable', 'alpha_dash', 'new \Statamic\Rules\UniqueUserValue({id})']  # Statamic 6 class-based rule
+              listable: true
+          -
+            handle: job_title
+            field: { type: text, display: 'Job title' }
+          -
+            handle: avatar
+            field: { type: assets, container: assets, folder: avatars, max_files: 1, display: Photo }
+          -
+            handle: bio
+            field: { type: textarea, display: Bio }
+          -
+            handle: socials
+            field:
+              type: grid
+              display: 'Social links'
+              mode: table
+              fields:
+                -
+                  handle: platform
+                  field: { type: select, display: Platform, options: { linkedin: LinkedIn, x: X, instagram: Instagram, youtube: YouTube, facebook: Facebook, website: Website } }
+                -
+                  handle: url
+                  field: { type: text, input_type: url, display: URL }
+          -
+            handle: is_guest
+            field: { type: toggle, display: 'Guest author (no login)', listable: true }
+          -
+            handle: wp_user_id
+            field: { type: integer, display: 'WordPress user ID', visibility: read_only }

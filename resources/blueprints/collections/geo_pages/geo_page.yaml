@@ -1,0 +1,50 @@
+title: Geo Location Page
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: title
+        field:
+          type: text
+          display: Title
+          required: true
+          validate:
+          - required
+      - handle: h1
+        field:
+          type: text
+          display: Page H1
+          validate:
+          - required
+      - handle: excerpt
+        field:
+          type: textarea
+          display: Excerpt
+      - handle: featured_image
+        field:
+          type: assets
+          container: assets
+          max_files: 1
+          display: Featured image
+      - import: rich_content
+  seo:
+    display: SEO
+    sections:
+    - fields:
+      - import: seo
+  legacy:
+    display: WordPress
+    sections:
+    - fields:
+      - import: legacy
+  sidebar:
+    display: Sidebar
+    sections:
+    - fields:
+      - handle: slug
+        field:
+          type: slug
+          display: Slug
+          validate:
+          - max:200

@@ -1,0 +1,107 @@
+title: 'Page builder (v2 sections)'
+# Each set handle maps 1:1 to a Nuxt section component: rich_text -> SectionRichText.vue, etc.
+# The blog dev adds sets here (via merge request) as v2 designs land.
+fields:
+  -
+    handle: page_builder
+    field:
+      type: replicator
+      display: Sections
+      collapse: false
+      sets:
+        sections:
+          display: Sections
+          sets:
+            hero:
+              display: Hero
+              fields:
+                -
+                  handle: eyebrow
+                  field: { type: text, display: Eyebrow }
+                -
+                  handle: heading
+                  field: { type: text, display: Heading, validate: [required] }
+                -
+                  handle: body
+                  field: { type: textarea, display: Text }
+                -
+                  handle: image
+                  field: { type: assets, container: assets, max_files: 1, display: Image }
+                -
+                  handle: buttons
+                  field:
+                    type: grid
+                    display: Buttons
+                    max_rows: 2
+                    fields:
+                      -
+                        import: cta_button
+                -
+                  import: section_surface
+            rich_text:
+              display: 'Rich text'
+              fields:
+                -
+                  import: rich_content
+                -
+                  import: section_surface
+            media:
+              display: 'Image or video'
+              fields:
+                -
+                  import: media
+                -
+                  handle: video
+                  field: { type: video, display: 'Video URL (instead of image)' }
+            cta_band:
+              display: 'CTA band'
+              fields:
+                -
+                  handle: heading
+                  field: { type: text, display: Heading }
+                -
+                  handle: body
+                  field: { type: textarea, display: Text }
+                -
+                  import: cta_button
+                  prefix: cta_
+                -
+                  import: section_surface
+            card_grid:
+              display: 'Card grid'
+              fields:
+                -
+                  handle: heading
+                  field: { type: text, display: Heading }
+                -
+                  handle: source
+                  field:
+                    type: button_group
+                    display: 'Cards come from'
+                    options:
+                      latest_posts: 'Latest posts'
+                      selected: 'Selected entries'
+                    default: latest_posts
+                -
+                  handle: entries
+                  field:
+                    type: entries
+                    display: Entries
+                    collections: [posts, workloads, events, press_releases]
+                    if:
+                      source: 'equals selected'
+                -
+                  handle: categories
+                  field:
+                    type: terms
+                    display: 'Limit to categories'
+                    taxonomies: [categories]
+                    if:
+                      source: 'equals latest_posts'
+                -
+                  handle: columns
+                  field:
+                    type: button_group
+                    display: Columns
+                    options: { '2': '2', '3': '3', '4': '4' }
+                    default: '3'
