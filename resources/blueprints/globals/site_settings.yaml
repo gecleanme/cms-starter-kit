@@ -15,10 +15,39 @@ tabs:
           type: text
           input_type: email
           display: Company email
+      - handle: company_phone
+        field:
+          type: text
+          input_type: tel
+          display: Company phone
       - handle: company_location
         field:
           type: textarea
           display: Company address
+      - handle: office_note
+        field:
+          type: text
+          display: Office note
+          instructions: Short line shown above the address.
+      - handle: directions_url
+        field:
+          type: text
+          input_type: url
+          display: Directions link
+          instructions: Google Maps link for the "Directions" button.
+      - handle: store_url
+        field:
+          type: text
+          input_type: url
+          display: Store URL
+          instructions: External store linked from the footer.
+      - handle: default_share_image
+        field:
+          type: assets
+          container: assets
+          max_files: 1
+          display: Default social share image
+          instructions: Used by pages, categories and authors that have no image of their own (1200 x 630).
       - handle: social_links
         field:
           type: grid

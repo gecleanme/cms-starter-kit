@@ -17,6 +17,9 @@ use Statamic\Events\GlobalVariablesSaved;
 use Statamic\Events\NavTreeSaved;
 use Statamic\Events\TermDeleted;
 use Statamic\Events\TermSaved;
+use Statamic\Events\UserDeleted;
+use Statamic\Events\UserSaved;
+use Statamic\Facades\GraphQL;
 use Statamic\Importer\WordPress\Gutenberg;
 use Statamic\Statamic;
 
@@ -40,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerFrontendRebuilds();
+        $this->maskPrivateUserFields();
 
         Statamic::booted(function (): void {
             $this->registerGutenbergHooks();
@@ -61,7 +65,24 @@ class AppServiceProvider extends ServiceProvider
             GlobalVariablesSaved::class,
             NavTreeSaved::class,
             CollectionTreeSaved::class,
+            UserSaved::class,    // author profiles (name, photo, bio) are shown on posts and /author/ pages
+            UserDeleted::class,
         ], QueueFrontendBuild::class);
+    }
+
+    /**
+     * GraphQL exposes every User field wherever a user appears (e.g. a post's `authors`).
+     * Overriding the resolvers keeps emails and control-panel links out of every GraphQL response,
+     * even for someone holding the API token. (REST does the same via 'excluded_keys' in config/statamic/api.php.)
+     */
+    private function maskPrivateUserFields(): void
+    {
+        foreach (['email', 'edit_url'] as $field) {
+            GraphQL::addField('User', $field, fn () => [
+                'type' => GraphQL::string(),
+                'resolve' => fn () => null,
+            ]);
+        }
     }
 
     /**

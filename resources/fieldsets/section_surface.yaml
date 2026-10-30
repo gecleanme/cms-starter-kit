@@ -1,4 +1,4 @@
-title: 'Section surface (design tokens)'
+title: 'Section settings (surface + anchor)'
 # Semantic surface names, mapped in Nuxt to theme tokens:
 # default -> bg-bg-primary, subtle -> bg-fg-quinary, brand -> bg-brand-2, accent -> bg-brand-1
 fields:
@@ -13,3 +13,12 @@ fields:
         brand: Brand
         accent: Accent
       default: default
+  -
+    handle: anchor_id
+    field:
+      type: slug
+      display: 'Anchor ID (optional)'
+      instructions: 'Lets menus link straight to this section, e.g. "faqs" for /resources/#faqs.'
+      validate:
+        - nullable
+        - alpha_dash

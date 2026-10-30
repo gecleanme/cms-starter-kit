@@ -1,0 +1,31 @@
+title: Partners
+# "We're in Good Company" logos (Home, About). Edited once here; the page builder's "Partner logos" section shows them.
+tabs:
+  main:
+    display: Main
+    sections:
+    - fields:
+      - handle: logos
+        field:
+          type: grid
+          display: Logos
+          mode: table
+          fields:
+          - handle: name
+            field:
+              type: text
+              display: Name
+              validate:
+              - required
+          - handle: logo
+            field:
+              type: assets
+              container: assets
+              max_files: 1
+              display: Logo
+              instructions: SVG preferred. The name is used as alt text.
+          - handle: url
+            field:
+              type: text
+              input_type: url
+              display: Link (optional)

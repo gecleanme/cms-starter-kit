@@ -37,6 +37,22 @@ fields:
               fields:
                 -
                   import: media
+            gallery:
+              display: Gallery
+              icon: media-image-picture-gallery
+              fields:
+                -
+                  handle: images
+                  field:
+                    type: assets
+                    container: assets
+                    display: Images
+                    min_files: 2
+                -
+                  handle: caption
+                  field:
+                    type: text
+                    display: Caption
             video_embed:
               display: 'Video (YouTube/Vimeo)'
               fields:

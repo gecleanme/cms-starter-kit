@@ -16,5 +16,30 @@
     "heading": "Receive Exclusive Access",
     "copy": "Subscribe to our newsletter for the latest early access information.",
     "form": "sign_up"
+  },
+  "partners": {
+    "logos": [
+      {
+        "name": "Partner 1",
+        "url": ""
+      },
+      {
+        "name": "Partner 2",
+        "url": ""
+      },
+      {
+        "name": "Partner 3",
+        "url": ""
+      },
+      {
+        "name": "Partner 4",
+        "url": ""
+      },
+      {
+        "name": "Partner 5",
+        "url": ""
+      }
+    ]
   }
+
 }

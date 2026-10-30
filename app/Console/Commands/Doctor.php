@@ -39,6 +39,11 @@ final class Doctor extends Command
         $this->check('Revisions enabled', (bool) config('statamic.revisions.enabled'), 'STATAMIC_REVISIONS_ENABLED=true');
         $this->check('Git automation off', ! config('statamic.git.enabled'), 'STATAMIC_GIT_ENABLED=false');
         $this->check('Users stored in database', config('statamic.users.repository') === 'eloquent', "'repository' => 'eloquent' in config/statamic/users.php");
+        $this->check('Auth provider uses the User model', config('auth.providers.users.driver') === 'eloquent' && config('auth.providers.users.model') === \App\Models\User::class, 'merge config-snippets/auth.php into config/auth.php');
+        $this->check('GraphQL enabled', (bool) config('statamic.graphql.enabled'), 'STATAMIC_GRAPHQL_ENABLED=true');
+        $this->check('GraphQL exposes posts', array_key_exists('posts', (array) config('statamic.graphql.resources.collections')), 'merge config-snippets/statamic-graphql.php');
+        $this->check('GraphQL authors query registered', in_array(\App\GraphQL\Queries\AuthorsQuery::class, (array) config('statamic.graphql.queries'), true), "add AuthorsQuery to 'queries' in config/statamic/graphql.php");
+        $this->warnIf('GraphQL token set', filled(config('statamic.graphql.auth_token')), 'STATAMIC_GRAPHQL_AUTH_TOKEN=<long random string> (required on servers)');
 
         foreach (['entries', 'collection_trees', 'terms', 'global_set_variables', 'navigation_trees', 'form_submissions', 'revisions', 'tokens'] as $repo) {
             $this->check("DB storage: {$repo}", config("statamic.eloquent-driver.{$repo}.driver") === 'eloquent', 'php please install:eloquent-driver --repositories=... (guide step)');
@@ -48,6 +53,9 @@ final class Doctor extends Command
         }
 
         $this->check('Assets disk defined', is_array(config('filesystems.disks.assets')), 'merge config-snippets/filesystems.php');
+        $this->check('Assets stored in shared storage', config('filesystems.disks.assets.driver') === 's3' || str_contains(str_replace('\\', '/', (string) config('filesystems.disks.assets.root')), 'storage/app/public/assets'), "delete Statamic's original 'assets' disk in config/filesystems.php so the kit's one wins");
+        $layout = resource_path('views/layout.antlers.html');
+        $this->check('CMS layout has no Vite tag', ! is_file($layout) || ! str_contains((string) file_get_contents($layout), '{{ vite'), 'use the kit\'s resources/views/layout.antlers.html (the CMS never builds front-end assets)');
         $this->check('App timezone is UTC', config('app.timezone') === 'UTC', 'APP_TIMEZONE=UTC (dates are imported in UTC)');
         $this->warnIf('Display timezone set', filled(config('statamic.system.display_timezone')), "set 'display_timezone' in config/statamic/system.php (wp:pull report shows the WordPress timezone)");
         $this->warnIf('Queue uses database', config('queue.default') === 'database', 'QUEUE_CONNECTION=database');
@@ -55,11 +63,13 @@ final class Doctor extends Command
         $this->check('Authors route registered', Route::has('cms.authors'), 'merge config-snippets/routes-web.php');
         $this->warnIf('WordPress source set', filled(config('services.wordpress.base_url')), 'WP_BASE_URL (only needed for imports)');
         $this->warnIf('Front-end deploy hook set', filled(config('services.frontend.deploy_hook')), 'FRONTEND_DEPLOY_HOOK_URL (empty is fine locally)');
+        $daily = collect(app(\Illuminate\Console\Scheduling\Schedule::class)->events())->contains(fn ($e) => $e->description === 'frontend-daily-rebuild');
+        $this->warnIf('Daily front-end rebuild scheduled', $daily, 'merge config-snippets/routes-console.php into routes/console.php (moves past events off "upcoming")');
 
         foreach (['posts', 'pages', 'events', 'investors', 'press_releases', 'workloads', 'geo_pages', 'redirects'] as $c) {
             $this->check("Collection {$c}", Collection::handleExists($c), 'copy the starter kit content/ folder, then php please stache:warm');
         }
-        foreach (['site_settings', 'newsletter_cta', 'tracking', 'careers'] as $g) {
+        foreach (['site_settings', 'newsletter_cta', 'tracking', 'careers', 'partners'] as $g) {
             $this->check("Global {$g}", (bool) GlobalSet::findByHandle($g), 'copy the starter kit content/ folder, then php please stache:warm');
         }
 

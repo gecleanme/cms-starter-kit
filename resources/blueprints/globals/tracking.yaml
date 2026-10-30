@@ -23,6 +23,13 @@ tabs:
         field:
           type: text
           display: Drip account ID
+      - handle: linkedin_partner_id
+        field:
+          type: text
+          display: LinkedIn Insight partner ID
+          validate:
+          - nullable
+          - regex:/^[0-9]+$/
       - handle: extra_head_scripts
         field:
           type: code

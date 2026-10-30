@@ -1,6 +1,11 @@
 title: 'Page builder (v2 sections)'
-# Each set handle maps 1:1 to a Nuxt section component: rich_text -> SectionRichText.vue, etc.
-# The blog dev adds sets here (via merge request) as v2 designs land.
+# Each set handle maps 1:1 to a Nuxt section component: rich_text -> SectionRichText.vue, faq -> SectionFaq.vue, etc.
+# In GraphQL each set arrives as type Set_PageBuilder_<SetHandle> (e.g. Set_PageBuilder_Hero) with a `type` field = the handle.
+# RULE: a grid/replicator/bard-with-sets handle must be unique across ALL sets below. GraphQL names nested types by field
+# path without the set name (GridItem_PageBuilder_<Handle>), so two sets with an `items` grid would collide.
+# The blog dev adds sets here (via merge request) as v2 designs land. Sets added 2026-10-30 come from the prod pages
+# reviewed then: faq (Resources), feature_list (About values, Careers perks, workload key features), logo_strip
+# (Home/About partners), image_compare (How it works), event_list (Events, Contact), team_spotlight (About), form_section (Contact).
 fields:
   -
     handle: page_builder
@@ -53,6 +58,8 @@ fields:
                 -
                   handle: video
                   field: { type: video, display: 'Video URL (instead of image)' }
+                -
+                  import: section_surface
             cta_band:
               display: 'CTA band'
               fields:
@@ -74,12 +81,16 @@ fields:
                   handle: heading
                   field: { type: text, display: Heading }
                 -
+                  handle: intro
+                  field: { type: textarea, display: 'Intro (optional)' }
+                -
                   handle: source
                   field:
                     type: button_group
                     display: 'Cards come from'
                     options:
                       latest_posts: 'Latest posts'
+                      latest_press: 'Latest press releases'
                       selected: 'Selected entries'
                     default: latest_posts
                 -
@@ -87,7 +98,7 @@ fields:
                   field:
                     type: entries
                     display: Entries
-                    collections: [posts, workloads, events, press_releases]
+                    collections: [posts, workloads, events, press_releases, pages]
                     if:
                       source: 'equals selected'
                 -
@@ -99,9 +110,198 @@ fields:
                     if:
                       source: 'equals latest_posts'
                 -
+                  handle: limit
+                  field:
+                    type: integer
+                    display: 'How many'
+                    default: 6
+                    unless:
+                      source: 'equals selected'
+                -
                   handle: columns
                   field:
                     type: button_group
                     display: Columns
                     options: { '2': '2', '3': '3', '4': '4' }
                     default: '3'
+                -
+                  handle: more_label
+                  field: { type: text, display: '"See all" button label (optional)', width: 50 }
+                -
+                  handle: more_link
+                  field: { type: link, display: '"See all" button link', width: 50, collections: [pages] }
+                -
+                  import: section_surface
+            feature_list:
+              display: 'Feature list (icon + title + text)'
+              fields:
+                -
+                  handle: eyebrow
+                  field: { type: text, display: Eyebrow }
+                -
+                  handle: heading
+                  field: { type: text, display: Heading }
+                -
+                  handle: intro
+                  field: { type: textarea, display: 'Intro (optional)' }
+                -
+                  handle: features
+                  field:
+                    type: grid
+                    display: Items
+                    mode: stacked
+                    min_rows: 1
+                    fields:
+                      -
+                        handle: icon
+                        field:
+                          type: text
+                          display: 'Icon (Material Symbols name)'
+                          instructions: 'e.g. bolt, groups, trending_up. Browse at fonts.google.com/icons.'
+                          validate: ['nullable', 'regex:/^[a-z0-9_]+$/']
+                      -
+                        handle: title
+                        field: { type: text, display: Title, validate: [required] }
+                      -
+                        handle: text
+                        field: { type: textarea, display: Text }
+                      -
+                        handle: link
+                        field: { type: link, display: 'Link (optional)', collections: [pages, posts, workloads] }
+                -
+                  handle: columns
+                  field:
+                    type: button_group
+                    display: Columns
+                    options: { '2': '2', '3': '3', '4': '4' }
+                    default: '3'
+                -
+                  import: section_surface
+            faq:
+              display: 'FAQ (accordion)'
+              fields:
+                -
+                  handle: heading
+                  field: { type: text, display: Heading, default: FAQs }
+                -
+                  handle: intro
+                  field: { type: textarea, display: 'Intro (optional)' }
+                -
+                  handle: questions
+                  field:
+                    type: grid
+                    display: Questions
+                    mode: stacked
+                    min_rows: 1
+                    fields:
+                      -
+                        handle: question
+                        field: { type: text, display: Question, validate: [required] }
+                      -
+                        handle: answer
+                        field:
+                          type: bard
+                          display: Answer
+                          buttons: [bold, italic, anchor, unorderedlist, orderedlist]
+                          save_html: false
+                -
+                  import: section_surface
+            logo_strip:
+              display: 'Partner logos'
+              instructions: 'Logos come from Globals > Partners, so they are edited in one place.'
+              fields:
+                -
+                  handle: heading
+                  field: { type: text, display: Heading, default: "We're in Good Company" }
+                -
+                  import: section_surface
+            image_compare:
+              display: 'Image comparison (before/after slider)'
+              fields:
+                -
+                  handle: heading
+                  field: { type: text, display: Heading }
+                -
+                  handle: before_image
+                  field: { type: assets, container: assets, max_files: 1, display: 'Before image', validate: [required] }
+                -
+                  handle: before_label
+                  field: { type: text, display: 'Before label' }
+                -
+                  handle: after_image
+                  field: { type: assets, container: assets, max_files: 1, display: 'After image', validate: [required] }
+                -
+                  handle: after_label
+                  field: { type: text, display: 'After label' }
+                -
+                  import: section_surface
+            event_list:
+              display: 'Event list'
+              fields:
+                -
+                  handle: heading
+                  field: { type: text, display: Heading }
+                -
+                  handle: intro
+                  field: { type: textarea, display: 'Intro (optional)' }
+                -
+                  handle: show
+                  field:
+                    type: button_group
+                    display: Show
+                    options: { upcoming: Upcoming, past: Past }
+                    default: upcoming
+                -
+                  handle: limit
+                  field: { type: integer, display: 'How many (empty = all)' }
+                -
+                  handle: more_label
+                  field: { type: text, display: '"See all" button label (optional)', width: 50 }
+                -
+                  handle: more_link
+                  field: { type: link, display: '"See all" button link', width: 50, collections: [pages] }
+                -
+                  import: section_surface
+            team_spotlight:
+              display: 'Team spotlight'
+              fields:
+                -
+                  handle: heading
+                  field: { type: text, display: Heading }
+                -
+                  handle: people
+                  field:
+                    type: users
+                    display: People
+                    mode: select
+                    instructions: 'Name, photo, job title and bio come from each user''s author profile.'
+                -
+                  handle: body
+                  field:
+                    type: bard
+                    display: 'Story (optional)'
+                    buttons: [h3, bold, italic, anchor, unorderedlist]
+                    save_html: false
+                -
+                  import: section_surface
+            form_section:
+              display: 'Form'
+              fields:
+                -
+                  handle: heading
+                  field: { type: text, display: Heading }
+                -
+                  handle: body
+                  field: { type: textarea, display: Text }
+                -
+                  handle: form
+                  field: { type: form, display: Form, max_items: 1, validate: [required] }
+                -
+                  handle: show_contact_details
+                  field:
+                    type: toggle
+                    display: 'Show contact details beside the form'
+                    instructions: 'Email, phone and office from Globals > Site Settings.'
+                    default: false
+                -
+                  import: section_surface

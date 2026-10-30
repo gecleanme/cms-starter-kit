@@ -11,10 +11,18 @@ tabs:
           required: true
           validate:
           - required
+      - handle: icon
+        field:
+          type: assets
+          container: assets
+          max_files: 1
+          display: Icon
+          instructions: Small illustration used on workload cards and the page hero (was the 150x150 image on prod).
       - handle: excerpt
         field:
           type: textarea
           display: Excerpt
+          instructions: One or two sentences for cards ("Learn More" tiles on Home and How it works).
       - handle: featured_image
         field:
           type: assets
@@ -49,6 +57,11 @@ tabs:
               container: assets
               max_files: 1
               display: Icon
+  layout:
+    display: Page sections (v2)
+    sections:
+    - fields:
+      - import: page_builder
   seo:
     display: SEO
     sections:
